@@ -1,9 +1,8 @@
 from flask import Blueprint
-
 from my_app.hello.models import MESSAGES
 
-hello = Blueprint('hello', __name__)
+my_blueprint = Blueprint('my_blueprint', __name__)
 
-@hello.route('/')
+@my_blueprint.route('/')
 def hello():
     return MESSAGES['default']
