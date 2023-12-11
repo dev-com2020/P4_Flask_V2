@@ -1,7 +1,7 @@
 import json
 
 from flask import request, jsonify, Blueprint, flash, render_template, redirect, url_for
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 
 from my_app import db, api
 from my_app.catalog.models import Product, Category, ProductForm
@@ -93,15 +93,54 @@ class ProductApi(Resource):
                 'price': product.price,
                 'category': product.category.name
             }
-        return json.dumps(res)
+        return jsonify(res)
+
     def post(self):
-        return 'Zapytanie POST'
+        parser = reqparse.RequestParser()
+        args = parser.parse_args()
+        name = args['name']
+        price = args['price']
+        categ_name = args['category']['name']
+        category = Category.query.filter_by(name=categ_name).first()
+        if not category:
+            category = Category(categ_name)
+        product = Product(name, price, category)
+        db.session.add(product)
+        db.session.commit()
+        res = {}
+        res[product.id] = {
+            'name': product.name,
+            'price': product.price,
+            'category': product.category.name
+        }
+        return jsonify(res)
 
     def put(self, id):
-        return 'Odpowiedź PUT'
+        parser = reqparse.RequestParser()
+        args = parser.parse_args()
+        name = args['name']
+        price = args['price']
+        categ_name = args['category']['name']
+        category = Category.query.filter_by(name=categ_name).first()
+        Product.query.filter_by(id=id).update({
+            'name': name,
+            'price': price,
+            'category_id': category.id
+        })
+        db.session.commit()
+        res = {}
+        res[product.id] = {
+            'name': product.name,
+            'price': product.price,
+            'category': product.category.name
+        }
+        return jsonify(res)
 
     def delete(self, id):
-        return 'Zapytanie DELETE'
+        product = Product.query.filter_by(id=id)
+        product.delete()
+        db.session.commit()
+        return json.dumps({'response': 'Success'})
 
 
 api.add_resource(
