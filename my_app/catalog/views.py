@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint, flash, render_template
+from flask import request, jsonify, Blueprint, flash, render_template, redirect, url_for
 
 from my_app import db
 from my_app.catalog.models import Product, Category, ProductForm
@@ -64,6 +64,7 @@ def create_product():
         db.session.add(product)
         db.session.commit()
         flash(f'Produkt {name} został dodany.', 'success')
+        return redirect(url_for('catalog.home'))
     return render_template('product-create.html', form=form)
 
 
