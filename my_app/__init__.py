@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.sqlite"
+app.config["WTF_CSRF_SECRET_KEY"] = 'y745ncv230%^7B08'
 # app.config["SQLALCHEMY_DATABASE_URI"] = f"mariadb://{1254}:{12345}@localhost/exampledbflask"
 # app.register_blueprint(my_blueprint)
 # app.register_blueprint(product_blueprint)
@@ -17,6 +18,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.sqlite"
 db = SQLAlchemy()
 migrate = Migrate(app, db)
 db.init_app(app)
+app.secret_key = '784n23fd453$#22'
 
 from my_app.catalog.views import catalog
 app.register_blueprint(catalog)
