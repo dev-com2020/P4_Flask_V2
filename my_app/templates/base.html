@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Katalog produktów</title>
+    <link href="{{ url_for('static',filename='css/main.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
-
+<nav role="navigation">
+    <div>
+        <a href="{{ url_for('product.home') }}">PRODUKTY</a>
+    </div>
+</nav>
+    <div>
+        {% block container %}{% endblock %}
+    </div>
 </body>
 </html>
