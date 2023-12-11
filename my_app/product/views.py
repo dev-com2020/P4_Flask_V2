@@ -12,5 +12,5 @@ def home():
 
 @product_blueprint.route('/product/<key>')
 def product(key):
-    product = PRODUCTS.key(key)
+    product = PRODUCTS.get(key)
     return render_template('product.html', product=product)
