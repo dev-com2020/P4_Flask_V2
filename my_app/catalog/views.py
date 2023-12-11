@@ -17,6 +17,7 @@ def product(id):
     product = Product.query.get_or_404(id)
     return 'Produkt - %s, PLN %s' % (product.name, product.price)
 
+
 @catalog.route('/products')
 def products():
     products = Product.query.all()
@@ -28,11 +29,12 @@ def products():
         }
     return jsonify(res)
 
-@catalog.route('/product-create', methods=['POST',])
+
+@catalog.route('/product-create', methods=['POST', ])
 def create_product():
     name = request.form.get('name')
     price = request.form.get('price')
-    product = Product(name,price)
+    product = Product(name, price)
     db.session.add(product)
     db.session.commit()
     return "Stworzono produkt"
