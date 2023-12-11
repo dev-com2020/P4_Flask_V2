@@ -7,6 +7,10 @@ my_blueprint = Blueprint('my_blueprint', __name__)
 def hello():
     return MESSAGES['default']
 
+@my_blueprint.route('/show')
+def all_keys():
+    return MESSAGES['default']
+
 @my_blueprint.route('/show/<key>')
 def get_message(key):
     return MESSAGES.get(key) or "%s nie znaleziony" % key
