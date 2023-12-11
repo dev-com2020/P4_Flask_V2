@@ -4,5 +4,6 @@
     <h2>{{ product.name }}</h2>
     <h3>{{ product['category'] }}</h3>
     <h5>{{ product['price'] }}</h5>
+    <img src="{{ url_for('static',filename='images/product.png') }}" alt="Obraz produktu">
 </div>
 {% endblock %}
