@@ -1,3 +1,3 @@
 MESSAGES = {
-    'default': 'Witaj ze świata Flaska'
+    'default': 'Witaj ze świata Flaska...'
 }
