@@ -1,6 +1,9 @@
-from flask import request, jsonify, Blueprint, flash, render_template, redirect, url_for
+import json
 
-from my_app import db
+from flask import request, jsonify, Blueprint, flash, render_template, redirect, url_for
+from flask_restful import Resource
+
+from my_app import db, api
 from my_app.catalog.models import Product, Category, ProductForm
 
 catalog = Blueprint('catalog', __name__)
@@ -75,3 +78,34 @@ def create_category():
     db.session.add(category)
     db.session.commit()
     return "Stworzono kategorię"
+
+
+class ProductApi(Resource):
+    def get(self, id=None, page=1):
+        if not id:
+            products = Product.query.paginate(page=page, per_page=10).items
+        else:
+            products = [Product.query.get(id)]
+        res = {}
+        for product in products:
+            res[product.id] = {
+                'name': product.name,
+                'price': product.price,
+                'category': product.category.name
+            }
+        return json.dumps(res)
+    def post(self):
+        return 'Zapytanie POST'
+
+    def put(self, id):
+        return 'Odpowiedź PUT'
+
+    def delete(self, id):
+        return 'Zapytanie DELETE'
+
+
+api.add_resource(
+    ProductApi,
+    '/api/product',
+    '/api/product/<int:id>'
+)
