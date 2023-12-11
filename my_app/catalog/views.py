@@ -146,5 +146,6 @@ class ProductApi(Resource):
 api.add_resource(
     ProductApi,
     '/api/product',
-    '/api/product/<int:id>'
+    '/api/product/<int:id>',
+    '/api/product/<int:id>/<int:page>',
 )
