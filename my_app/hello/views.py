@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from my_app.hello.models import MESSAGES
 
 my_blueprint = Blueprint('my_blueprint', __name__)
@@ -21,7 +21,8 @@ my_blueprint = Blueprint('my_blueprint', __name__)
 
 @my_blueprint.route('/')
 def hello():
-    return render_template('index.html')
+    user = request.args.get('user', 'Użytkowniku')
+    return render_template('index.html', messages=MESSAGES['default'], user=user)
 
 
 @my_blueprint.route('/show/')
