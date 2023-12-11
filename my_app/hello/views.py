@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from hello.models import MESSAGES
+from my_app.hello.models import MESSAGES
 
 hello = Blueprint('hello', __name__)
 
