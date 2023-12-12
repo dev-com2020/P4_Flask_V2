@@ -36,4 +36,4 @@ class Category(db.Model):
 class ProductForm(FlaskForm):
     name = StringField('Name')
     price = DecimalField('Price')
-    category = SelectField('Category', coerce=int)
+    category = SelectField('Category')

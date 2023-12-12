@@ -7,10 +7,10 @@ from my_app.product.views import product_blueprint
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.sqlite"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.sqlite"
 app.config["WTF_CSRF_SECRET_KEY"] = 'y745ncv230%^7B08'
 api = Api(app)
-# app.config["SQLALCHEMY_DATABASE_URI"] = f"mariadb://{1254}:{12345}@localhost/exampledbflask"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:12345@localhost/exampledbflask"
 # app.register_blueprint(my_blueprint)
 # app.register_blueprint(product_blueprint)
 
