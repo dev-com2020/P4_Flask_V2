@@ -9,7 +9,7 @@
 <h2>Grupy studentów</h2>
 {% for table in tables %}
 <h3>{{ titles[loop.index] }}</h3>
-{{ table }}
+{{ table|safe }}
 {% endfor %}
 </body>
 </html>
