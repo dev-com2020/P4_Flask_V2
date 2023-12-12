@@ -1,5 +1,7 @@
+import random
+
 import dash
-from dash import html
+from dash import html, Output, Input
 from dash import dcc
 import plotly.express as px
 import pandas as pd
@@ -15,12 +17,25 @@ print(df)
 
 fig = px.bar(df, x='Owoce', y="Ilość", color='City', barmode='group')
 
+
+@app5.callback(
+    Output('example', 'figure'),
+    Input('button', 'n_clicks')
+)
+def update_graph(n_clicks):
+    if n_clicks is None:
+        return fig
+    else:
+        new_fig = px.bar(df, x='Owoce', y=[random.randint(1, 10) for _ in range(6)], color='City', barmode='group')
+        return new_fig
+
+
 app5.layout = html.Div(children=[
     html.H1(children='Hello Dash!'),
     html.Div(children='''
         Test aplikacji z Pythona...
     '''),
-    html.Button(title="TEST!"),
+    html.Button("Kliknij mnie aby zaktualizować dane", id='button'),
     dcc.Graph(id='example', figure=fig)
 ])
 
