@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "formatters" : {
+    "standard": {
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    "special": {
+      "format": "%(asctime)s - %(levelname)s - %(message)s"
+    }
+  },
+  "handlers": {
+    "file": {
+      "filename": "debug.log",
+      "level": "DEBUG",
+      "class" : "logging.FileHandler",
+      "formatter": "standard"
+    },
+    "stream": {
+      "level": "WARNING",
+      "class": "logging.StreamHandler",
+      "formatter": "special"
+    }
+  },
+  "loggers": {
+    "": {
+      "handlers": ["file","stream"],
+      "level": "DEBUG"
+    }
+  }
+}
