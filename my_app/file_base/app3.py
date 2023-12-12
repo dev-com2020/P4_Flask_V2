@@ -26,7 +26,13 @@ def users():
 
 @app3.route('/api/books', methods=['GET'])
 def books():
-    pass
+    df = pd.read_csv('users.csv')
+    data = request.get_json()
+    user = data['user']
+    bookid = df[df.name == user].bookid.values[0]
+    booksdf = pd.read_csv('books.csv')
+    book = booksdf[booksdf.bookid == bookid]
+    return {'book': book.to_dict()}, 200
 
 
 if __name__ == '__main__':
