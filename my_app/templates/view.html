@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+<h2>Grupy studentów</h2>
+{% for table in tables %}
+<h3>{{ titles[loop.index] }}</h3>
+{{ table }}
+{% endfor %}
+</body>
+</html>
