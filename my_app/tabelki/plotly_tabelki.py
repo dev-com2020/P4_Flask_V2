@@ -20,6 +20,7 @@ app5.layout = html.Div(children=[
     html.Div(children='''
         Test aplikacji z Pythona...
     '''),
+    html.Button(title="TEST!"),
     dcc.Graph(id='example', figure=fig)
 ])
 
